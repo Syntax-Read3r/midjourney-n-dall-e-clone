@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Loader, Card, FormField } from "../components";
 
+const RenderCards = ({ data, title }) => {
+	if (data?.length > 0) {
+		return data.map((post) => <Card key={post._id} {...post} />);
+	}
+
+	return (
+		<h2 className="mt-5 font-bold text-[#6449ff] text-xl uppercase">{title}</h2>
+	);
+};
+
 const Home = () => {
 	const [loading, setloading] = useState(false);
 	const [allPosts, setAllPosts] = useState(null);
 
-	const [searchText, setSearchText] = useState("saf");
+	const [searchText, setSearchText] = useState("");
 
 	return (
 		<section className="max-w-7x1 mx-auto ">
@@ -31,13 +41,30 @@ const Home = () => {
 					</div>
 				) : (
 					<>
+						{/* below is an if statement in react */}
 						{searchText && (
 							<h2 className="font-medium text-[#666e75]  mb-3">
-								Showing results for <span className="text-[#222328]">
-                  {searchText}
-                </span>
+								Showing results for{" "}
+								<span className="text-[#222328]">{searchText}</span>
 							</h2>
 						)}
+
+						<div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
+              {/* check if searchText exist */}
+              {searchText ? (
+                <RenderCards 
+                  data={[]}
+                  title="No Search Results Found"
+                />
+              ):(
+                <RenderCards 
+                data={[]}
+                title="No Posts Found"
+                />
+              )}
+
+
+            </div>
 					</>
 				)}
 			</div>
