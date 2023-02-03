@@ -20,10 +20,20 @@ const FormField = ({labelName, type, name, placeholder, value, handleChange, isS
             Surprise Me
           </button>
         )}
-
-    
-
       </div>
+
+      <input type={type}
+      id={name}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={handleChange}
+      required
+      className="px-2 py-2 border bg-[#ECECF1] text-sm rounded-lg w-full  text-gray-900 focus:ring-[#4649ff] focus:border-[#4649ff] focus:shadow-[#4649ff] mb-1"
+
+
+
+      />
     </div>
   )
 }
