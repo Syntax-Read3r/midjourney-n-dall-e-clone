@@ -14,6 +14,11 @@ app.get('/', async (req, res) => {
     res.send('hello Munya');
 })
 
+// create a way to run the express app
+const startServer = async () => {
+    app.listen(8080, () => console.log('server has started on port 8080'));
+}
 
+startServer();
 
 
