@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import connectDB from './mongodb/connect.js';
-import postRoutes from './routes/posts.js';
-import dalleRoutes from './routes/dallas.js';
+import postRoutes from './routes/postRoutes.js';
+import dalleRoutes from './routes/dalleRoutes.js';
 
 
 dotenv.config(); //this line allow me to pull environment variable from the dotenv file
