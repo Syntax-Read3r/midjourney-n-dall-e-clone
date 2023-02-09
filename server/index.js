@@ -3,6 +3,9 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import connectDB from './mongodb/connect.js';
+import postRoutes from './routes/posts.js';
+import dalleRoutes from './routes/dallas.js';
+
 
 dotenv.config(); //this line allow me to pull environment variable from the dotenv file
 
@@ -10,6 +13,14 @@ dotenv.config(); //this line allow me to pull environment variable from the dote
 const app = express();
 app.use(cors()); // make cors for express app or middle ware.
 app.use(express.json({limit: '50mb'})); //use json format for every request.
+
+// NOTE: to use the routes in this app, one has to add the middleware.
+app.use('/api/v1/posts', postRoutes);
+app.use('/api/v1/dalle', dalleRoutes);
+
+
+
+
 
 // create route
 app.get('/', async (req, res) => {
