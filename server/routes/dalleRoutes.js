@@ -16,9 +16,11 @@ router.route('/').get((req, res) => {
     res.send('Hello from DALL-E')
 });
 
-router.router('/').post(async(req,res) => {
+router.route('/').post(async(req,res) => {
     try {
         const {prompt} = req.body; //The will come from the frontend side
+
+        console.log('I am here')
 
         const aiResponse = await openai.createImage({
             prompt,
@@ -27,13 +29,18 @@ router.router('/').post(async(req,res) => {
             response_format:'b64_json',
         })
 
+        console.log('I am here 2')
+
+
         const image = aiResponse.data.data[0].b64_json;
+
+        console.log('I am here 3')
 
         res.status(200).json({photo: image});
         
     } catch (error) {
         console.log(error);
-        res.status(500).send(error?.response.data.error.message || error);
+        res.status(500).send(error?.response.data.error.message );
 
     }
 })

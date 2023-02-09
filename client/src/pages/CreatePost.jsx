@@ -24,33 +24,37 @@ const CreatePost = () => {
 
   const generateImg = async () => {
 	if(form.prompt) {
-		try {
-			setGeneratingImg(true);
-			const response = await fetch('http://localhost:80080/api/v1/dalle', {
-				method: 'POST',
-				header: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					prompt: form.prompt,
-
-				}),
-			})
-
-			// to parse that data to be able to see it
-			const data = await response.json();
-			// once you have the data, you can set it to the state
-			setForm({...form, photo:`data:image/jpeg;base64,${data.photo}`})
-		} catch (error) {
-			alert(error);
-		} finally {
-			setGeneratingImg(false)
+	  try {
+		setGeneratingImg(true);
+		console.log('I am client here 1');
+		const response = await fetch('http://localhost:8080/api/v1/dalle', {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+			prompt: form.prompt,
+		  }),
+		});
+		console.log('I am client here 2');
+  
+		if (!response.ok) {
+		  throw new Error(`Failed to fetch image: ${response.statusText}`);
 		}
+  
+		const data = await response.json();
+		setForm({...form, photo:`data:image/jpeg;base64,${data.photo}`});
+		console.log('I am client here 3');
+	  } catch (error) {
+		alert(error);
+	  } finally {
+		setGeneratingImg(false);
+	  }
 	} else {
-		alert ('May you please enter a prompt?');
+	  alert ('May you please enter a prompt?');
 	}
-
   };
+  
 
 	// NOTE: Handles
 

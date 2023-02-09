@@ -20,8 +20,6 @@ app.use('/api/v1/dalle', dalleRoutes);
 
 
 
-
-
 // create route
 app.get('/', async (req, res) => {
     res.send('hello Munya!!');
@@ -36,7 +34,7 @@ const startServer = async () => {
         
     app.listen(8080, () => console.log('server has started on port 8080'));
     } catch (error) {
-        console.log(error);
+        console.log('error in server',error);
     }
 
 }
